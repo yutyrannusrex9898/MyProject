@@ -1,16 +1,15 @@
 // Working PNs
 // 3YM61AE
-// 1VQ22EA
 // J8H61A
 // 3R133EA
 
 var ccs_cc_args = ccs_cc_args || [];
 
 function onPageLoad() {
-    setParams(ccs_cc_args)
-    setLanguageForParams(ccs_cc_args)
-    const pn = getProductNumber()
-    getProductPage(ccs_cc_args, pn)
+    setParams(ccs_cc_args);
+    setLanguageForParams(ccs_cc_args);
+    const pn = getProductNumber();
+    getProductPage(ccs_cc_args, pn);
     // updateTitle()
 }
 
@@ -29,7 +28,7 @@ function setLanguageForParams(params) {
 
 function getProductNumber() {
     const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('productNumber')
+    return urlParams.get('productNumber');
 }
 
 function getProductPage(params, pn) {
@@ -50,8 +49,10 @@ function getProductPage(params, pn) {
     myElement.parentNode.insertBefore(script, myElement);
 }
 
-function updateTitle() {
-    const headerElement = document.getElementsByClassName('ccs-cc-inline-header')[0]
-    const titleElement = headerElement.getElementsByClassName('ccs-cc-inline-section-title')[0]
-    document.title = titleElement.innerText;
-}
+//tried to change website title but didnt seem to work
+
+// function updateTitle() {
+//     const headerElement = document.getElementsByClassName('ccs-cc-inline-header')[0];
+//     const titleElement = headerElement.getElementsByClassName('ccs-cc-inline-section-title')[0];
+//     document.title = titleElement.innerText;
+// }
