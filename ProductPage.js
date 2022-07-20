@@ -1,4 +1,4 @@
-// Working PNs
+// Working SKUs
 // 3YM61AE
 // J8H61A
 // 3R133EA
@@ -8,8 +8,8 @@ var ccs_cc_args = ccs_cc_args || [];
 function onPageLoad() {
     setParams(ccs_cc_args);
     setLanguageForParams(ccs_cc_args);
-    const pn = getProductNumber();
-    getProductPage(ccs_cc_args, pn);
+    let SKU = getProductNumber();
+    getProductPage(ccs_cc_args, SKU);
     // updateTitle()
 }
 
@@ -22,18 +22,36 @@ function setParams(params) {
 }
 
 function setLanguageForParams(params) {
-    const lang = navigator.language.slice(0, 2);
-    params.push(['lang', lang]);
+    // Disabled, we currently only want fr(ench).
+    // const lang = navigator.language.slice(0, 2);
+    // params.push(['lang', lang]);
+
+    params.push(['lang', 'fr']);
 }
 
 function getProductNumber() {
     const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('productNumber');
+    const SKU = urlParams.get('productNumber');
+    return simplifySKU(SKU);
 }
 
-function getProductPage(params, pn) {
+function simplifySKU(SKU) {
+    const indexOfHashSign = SKU.indexOf('#')
+    if (indexOfHashSign !== -1) {
+        SKU = SKU.slice(0, indexOfHashSign);
+    }
+
+    const indexOfSlashSign = SKU.indexOf('/')
+    if (indexOfSlashSign !== -1) {
+        SKU = SKU.slice(0, indexOfSlashSign);
+    }
+
+    return SKU;
+}
+
+function getProductPage(params, SKU) {
     const reqParams = params;
-    reqParams.push(['pn', pn]);
+    reqParams.push(['pn', SKU]);
     reqParams.push(['_SKey', 'cd6e58ab']);
     reqParams.push(['_ZoneId', 'aca3973787']);
     // o.push(['_SKey', '2de3937d']);,
